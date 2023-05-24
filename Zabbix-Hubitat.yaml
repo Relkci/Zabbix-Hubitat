@@ -1,0 +1,824 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    -
+      uuid: 7df96b18c230490a9a0a9e2307226338
+      name: Templates
+    -
+      uuid: a571c0d144b14fd4a87a9d9b2aa9fcd6
+      name: Templates/Applications
+  templates:
+    -
+      uuid: 7678b029251443cc9ce0a50d6afd4ac1
+      template: Hubitat
+      name: Hubitat
+      groups:
+        -
+          name: Templates
+        -
+          name: Templates/Applications
+      items:
+        -
+          uuid: 743a136011164c299d0d1d8ebfae8d8d
+          name: 'Devices Count'
+          type: DEPENDENT
+          key: hubitat.devices.count
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.length()
+          master_item:
+            key: hubitat.discovery.data
+        -
+          uuid: 2a4229fe9e6f4e20b5d5740cc54107a2
+          name: hubitat.discovery.data
+          type: HTTP_AGENT
+          key: hubitat.discovery.data
+          history: 1h
+          trends: '0'
+          value_type: TEXT
+          url: 'http://{HOST.CONN}/apps/api/{$HUBITAT_APP_ID}/devices'
+          query_fields:
+            -
+              name: access_token
+              value: '{$HUBITAT_ACCESS_TOKEN}'
+        -
+          uuid: 03ed973b7c884e1b9362e380a7ca60f4
+          name: 'Hubitat Alert - Database Size'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.databaseSize
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.databaseSize
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 57f62a764dca429d81ffbdf4c060b165
+          name: 'Hubitat Alert - Header Message'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.headerMessages
+          delay: '0'
+          history: 1h
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.headerMessages
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 174098855208424791f87532aff19a29
+          name: 'Hubitat Alert - Load High'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubHighLoad
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubHighLoad
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 4edaf9bfe24942279b8f06803d9942ab
+          name: 'Hubitat Alert - Huge Database'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubHugeDatabase
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubHugeDatabase
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: b2d661fbe17340c7ae6e76142349507d
+          name: 'Hubitat Alert - Large Database'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubLargeDatabase
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubLargeDatabase
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: f18ad9d346bc45a398b3a04dede763ac
+          name: 'Hubitat Alert - Largeish Database'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubLargeishDatabase
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubLargeishDatabase
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 3aa7ba00e8e742d7b4841797499be828
+          name: 'Hubitat Alert - Load Elevated'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubLoadElevated
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubLoadElevated
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 2c69a6db8bdf44aa8b24625214d53ff5
+          name: 'Hubitat Alert - Load Severe'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubLoadSevere
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubLoadSevere
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 00a1974f4f6441f49035d0945bf935e6
+          name: 'Hubitat Alert - Low Memory'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubLowMemory
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubLowMemory
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: f641a5e1a66c400b9b861630a7d9d5fc
+          name: 'Hubitat Alert - Zwave Crashed'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.hubZwaveCrashed
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.hubZwaveCrashed
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 0f37259461b74091b2cbe2f93ca82464
+          name: 'Hubitat Alert - Udpate Available'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.platformUpdateAvailable
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.platformUpdateAvailable
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: d8aab2b645b2419aa02299329168552d
+          name: 'Hubitat Alert - Run Alerts'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.runAlerts
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.runAlerts
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 3a0a3217df784b15b82cda15f13c30c1
+          name: 'Hubitat Alert - Run Alerts Counter'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.runAlertsCounter
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.runAlertsCounter
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: e10eb30eb6754c5a9481b0eb493ee03a
+          name: 'Hubitat Alert - Spammy Devices'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.spammyDevices
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.spammyDevices
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 08d378eea0d841909c19f203ffa81e29
+          name: 'Hubitat Alert - Zigbee Offline'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.zigbeeOffline
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.zigbeeOffline
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 8e19e64c65f24c6eac4c1235318bc199
+          name: 'Hubitat Alert - ZWave Offline'
+          type: DEPENDENT
+          key: hubitat.hub.alerts.zwaveOffline
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.alerts.zwaveOffline
+            -
+              type: BOOL_TO_DECIMAL
+              parameters:
+                - ''
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 2d29cb1bf34040d6ab02f7e7c3f564af
+          name: hubitat.hub.data
+          type: HTTP_AGENT
+          key: hubitat.hub.data
+          history: 1h
+          trends: '0'
+          value_type: TEXT
+          url: 'http://{HOST.CONN}/hub2/hubData'
+          query_fields:
+            -
+              name: access_token
+              value: '{$HUBITAT_ACCESS_TOKEN}'
+        -
+          uuid: a18298a692ce4dbe9527faaa307432ea
+          name: 'Hubitat Hub Device Version'
+          type: DEPENDENT
+          key: hubitat.hub.hubVersion
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.hubVersion
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: bb18c9c177974a6183b8471a42138d05
+          name: 'Hubitat Hub ID'
+          type: DEPENDENT
+          key: hubitat.hub.id
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.hubId
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: fa1ccfbf7aff4b4bb853113caf684a67
+          name: 'Hubitat Name'
+          type: DEPENDENT
+          key: hubitat.hub.name
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.name
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 9e0942f713a046d4937079b21cbee0b9
+          name: 'Hubitat Version'
+          type: DEPENDENT
+          key: hubitat.hub.version
+          delay: '0'
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.version
+          master_item:
+            key: hubitat.hub.data
+        -
+          uuid: 06cbf1aea2424c14a0c4e49015901453
+          name: 'Hubitat Port 80'
+          type: SIMPLE
+          key: 'net.tcp.service.perf[http,,80]'
+          value_type: FLOAT
+      discovery_rules:
+        -
+          uuid: 74c2bd2f99904398902be2d0c6a8a2d4
+          name: 'Hubitat Devices'
+          type: DEPENDENT
+          key: hubitat.devices.data
+          delay: '0'
+          item_prototypes:
+            -
+              uuid: 858339f456f54b83bbdf3a3673da0e94
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Battery'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.battery.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "battery")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: c3e61f30eb2d402dbc8d41514d2da9d8
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Cooling Set Point'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.coolingSetpoint.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "coolingSetpoint")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 1202749e3cb748489d3aeea02ae13a81
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Double Tapped'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.doubletapped.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "doubleTapped")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 66eca45da5d0478c9490421ec7f42c30
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Heating Set Point'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.heatingsetpoint.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "heatingSetpoint")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 5ee5134e91534649b36599e22d83476c
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Held'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.held.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "held")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 5dc583d413864dfb833b96500f970324
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Humidity'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.humidity.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "humidity")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 2836bd28b2924c118842ed3d1bd34a12
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Pushed'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.pushed.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "pushed")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 3e93937b214f4d4b941e7456fb5de790
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Released'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.released.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "released")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 83b6cba7a05942ddbe2b51632efc6233
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Switch'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.switch.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "switch")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 099fd140d2454356be9081cfcaa3305e
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Temperature'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.temperature.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "temperature")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 743c4428d6ab4583a75528c947eda9cb
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermostat Fan Mode'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.thermostatFanMode.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "thermostatFanMode")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 556361ad08e0476898b131683ae19b11
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermostat Mode'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.thermostatMode.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "thermostatMode")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: cea6faed3fc84cb5b61792f3212bda77
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermostat Operating State'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.thermostatOperatingState.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "thermostatOperatingState")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 1ebfceb073e6451a9151844c6f583070
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermostat Set Point'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.thermostatSetpoint.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "thermostatSetpoint")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 62afbc710fc64b96a5b5aefcc267cf38
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Capabilities'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.capabilities.data.[{#DEVICE_ID}]'
+              delay: '0'
+              history: 1h
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.capabilities
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 19844778c84746d9ba7ce4d11a6be75b
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Commands'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.commands.data.[{#DEVICE_ID}]'
+              delay: '0'
+              history: 1d
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.commands
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: d3758db114da453f98dc4bfe0bcebcce
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Name'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.name.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.name
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 383cb3458e7e41678f97340ad8f126cc
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Room'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.room.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.room
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 9008088aa9a24d1ca618d3ce616a0d8d
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Type'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.type.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.type
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: 919131d08ded40a3b234b1cad96e1a88
+              name: 'hubitat.devices.data.[{#DEVICE_ID}]'
+              type: HTTP_AGENT
+              key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+              trends: '0'
+              value_type: TEXT
+              url: 'http://{HOST.CONN}/apps/api/{$HUBITAT_APP_ID}/devices/{#DEVICE_ID}'
+              query_fields:
+                -
+                  name: access_token
+                  value: '{$HUBITAT_ACCESS_TOKEN}'
+          graph_prototypes:
+            -
+              uuid: 8d9271f7694c4d2d931c10ffd3fab891
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Battery'
+              ymin_type_1: FIXED
+              ymax_type_1: FIXED
+              graph_items:
+                -
+                  color: 199C0D
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.battery.[{#DEVICE_ID}]'
+            -
+              uuid: 95313aa324b7496a9f1ec880a1b593bd
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Temperature & Humidity'
+              graph_items:
+                -
+                  color: 199C0D
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.temperature.[{#DEVICE_ID}]'
+                -
+                  sortorder: '1'
+                  color: F63100
+                  yaxisside: RIGHT
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.humidity.[{#DEVICE_ID}]'
+            -
+              uuid: 11d81f5f3e91448c874bb29e9d1db572
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermastat'
+              graph_items:
+                -
+                  color: 199C0D
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.temperature.[{#DEVICE_ID}]'
+                -
+                  sortorder: '1'
+                  color: F63100
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.coolingSetpoint.[{#DEVICE_ID}]'
+                -
+                  sortorder: '2'
+                  color: 2774A4
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.heatingsetpoint.[{#DEVICE_ID}]'
+                -
+                  sortorder: '3'
+                  color: F7941D
+                  calc_fnc: ALL
+                  item:
+                    host: Hubitat
+                    key: 'hubitat.devices.data.atr.thermostatSetpoint.[{#DEVICE_ID}]'
+          master_item:
+            key: hubitat.discovery.data
+          preprocessing:
+            -
+              type: STR_REPLACE
+              parameters:
+                - '"name"'
+                - '"{#DEVICE_NAME}"'
+            -
+              type: STR_REPLACE
+              parameters:
+                - '"id"'
+                - '"{#DEVICE_ID}"'
+            -
+              type: STR_REPLACE
+              parameters:
+                - '"label"'
+                - '"{#DEVICE_LABEL}"'
+      tags:
+        -
+          tag: Application
+          value: Hubitat
+      macros:
+        -
+          macro: '{$HUBITAT_ACCESS_TOKEN}'
+          value: xxxxxxx
+          description: 'Access token from Maker API'
+        -
+          macro: '{$HUBITAT_APP_ID}'
+          value: xxxxx
+          description: 'Numeric Maker API App ID (From Maker  API URL)  - Example: http://hubitat/apps/api/1332/ The App ID = 1332'
