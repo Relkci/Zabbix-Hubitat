@@ -26,7 +26,12 @@ Requires use of Hubitat Marer API
 |-------------|
 
 # Supported Devices
+- The Hub itself
 - The discovery API pulls in attributes for thermostats and standard switches.  More attributes will be added as I monitor more device types.
+
+# Items
+- Hub Status and Alerts
+- Devices via LLD
 
 # Screenshots
 
