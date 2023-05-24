@@ -49,6 +49,10 @@ Battery Graph
 | ![image](https://github.com/Relkci/Zabbix-Hubitat/assets/29710634/0734007c-f0af-426e-9f7e-0881fc374fab) |
 |--------------|
 
+Hubitat Alerts 
+| ![image](https://github.com/Relkci/Zabbix-Hubitat/assets/29710634/47560895-e9b6-49d7-b1c4-8a716a7ddb1d) |
+|--------------|
+
 
 
 # Contact
