@@ -1,4 +1,4 @@
-# Zabbix_Template_Template
+# Zabbix Hubitat Template
 Zabbix Template for Hubitat Smart Home Hub
 * https://hubitat.com/
 
