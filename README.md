@@ -40,7 +40,7 @@ Requires use of Hubitat Marer API
 - Low Memory
 - Platform Update Available
 
-| ![image](https://github.com/Relkci/Zabbix-Hubitat/assets/29710634/b671fd6d-5585-4379-9047-f2f298a210ca) | 
+| ![image](https://github.com/Relkci/Zabbix-Hubitat/assets/29710634/c3edefbe-e6b5-495d-9120-3739ed5e05e6) | 
 |----------------| 
 
 # Screenshots
