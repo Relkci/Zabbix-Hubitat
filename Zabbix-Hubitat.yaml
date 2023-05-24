@@ -490,6 +490,25 @@ zabbix_export:
               master_item:
                 key: 'hubitat.devices.data.[{#DEVICE_ID}]'
             -
+              uuid: cbcd3e154e714a23a7eb400f0f39344f
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Contact'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.contact.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "contact")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
               uuid: c3e61f30eb2d402dbc8d41514d2da9d8
               name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Cooling Set Point'
               type: DEPENDENT
@@ -575,6 +594,23 @@ zabbix_export:
               master_item:
                 key: 'hubitat.devices.data.[{#DEVICE_ID}]'
             -
+              uuid: 7d2b7eaa3ef149c3bacbe4e16fab7b0a
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Level'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.level.[{#DEVICE_ID}]'
+              delay: '0'
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "level")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
               uuid: 2836bd28b2924c118842ed3d1bd34a12
               name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Pushed'
               type: DEPENDENT
@@ -625,6 +661,25 @@ zabbix_export:
                   type: JSONPATH
                   parameters:
                     - '$..[?(@.name == "switch")].currentValue.first()'
+              master_item:
+                key: 'hubitat.devices.data.[{#DEVICE_ID}]'
+            -
+              uuid: ec633f9da3bd4196bf3a844e3af30106
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Tamper'
+              type: DEPENDENT
+              key: 'hubitat.devices.data.atr.tamper.[{#DEVICE_ID}]'
+              delay: '0'
+              trends: '0'
+              value_type: TEXT
+              preprocessing:
+                -
+                  type: JSONPATH
+                  parameters:
+                    - $.attributes
+                -
+                  type: JSONPATH
+                  parameters:
+                    - '$..[?(@.name == "tamper")].currentValue.first()'
               master_item:
                 key: 'hubitat.devices.data.[{#DEVICE_ID}]'
             -
