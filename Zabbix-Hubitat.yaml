@@ -840,7 +840,7 @@ zabbix_export:
                     key: 'hubitat.devices.data.atr.humidity.[{#DEVICE_ID}]'
             -
               uuid: 11d81f5f3e91448c874bb29e9d1db572
-              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermastat'
+              name: 'Device [{#DEVICE_ID}]-{#DEVICE_LABEL}: Thermostat'
               graph_items:
                 -
                   color: 199C0D
