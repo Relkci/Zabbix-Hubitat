@@ -375,7 +375,7 @@ zabbix_export:
               uuid: df55a761949843469de6d1247357b680
               expression: last(/Hubitat/hubitat.hub.alerts.zwaveOffline)=1
               recovery_mode: RECOVERY_EXPRESSION
-              recovery_expression: last(/Hubitat/hubitat.hub.alerts.zwaveOffline)=1
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.zwaveOffline)=0
               name: 'Hubitat Alert - ZWave Offline'
               event_name: 'Hubitat Alert - ZWave Offline'
               priority: WARNING
