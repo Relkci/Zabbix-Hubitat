@@ -33,6 +33,12 @@ Requires use of Hubitat Marer API
 - Hub Status and Alerts
 - Devices via LLD
 
+# Alerts
+- Hub Load - Elevated / High / Severe 
+- Zwave Offline / Crashed
+- Zigbee Offline
+- Low Memory
+
 # Screenshots
 
 Thermostat Graph
