@@ -90,6 +90,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: ed8ebcd221104be8adf4e78fb72fc2e2
+              expression: last(/Hubitat/hubitat.hub.alerts.hubHighLoad)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.hubHighLoad)=0
+              name: 'Hubitat Alert - Load High'
+              event_name: 'Hubitat Alert - Load High'
+              priority: WARNING
         -
           uuid: 4edaf9bfe24942279b8f06803d9942ab
           name: 'Hubitat Alert - Huge Database'
@@ -158,6 +167,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: 18273d861fea4b0c930eb97419d0d234
+              expression: last(/Hubitat/hubitat.hub.alerts.hubLoadElevated)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.hubLoadElevated)=0
+              name: 'Hubitat Alert - Load Elevated'
+              event_name: 'Hubitat Alert - Load Elevated'
+              priority: WARNING
         -
           uuid: 2c69a6db8bdf44aa8b24625214d53ff5
           name: 'Hubitat Alert - Load Severe'
@@ -175,6 +193,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: 54a68d35a800424590648b579ab348e9
+              expression: last(/Hubitat/hubitat.hub.alerts.hubLoadSevere)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.hubLoadSevere)=0
+              name: 'Hubitat Alert - Load Severe'
+              event_name: 'Hubitat Alert - Load Severe'
+              priority: HIGH
         -
           uuid: 00a1974f4f6441f49035d0945bf935e6
           name: 'Hubitat Alert - Low Memory'
@@ -192,6 +219,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: 7f795f654b1d4c45983030a661c4cbd0
+              expression: last(/Hubitat/hubitat.hub.alerts.hubLowMemory)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.hubLowMemory)=0
+              name: 'Hubitat Alert - Low Memory'
+              event_name: 'Hubitat Alert - Low Memory'
+              priority: WARNING
         -
           uuid: f641a5e1a66c400b9b861630a7d9d5fc
           name: 'Hubitat Alert - Zwave Crashed'
@@ -209,6 +245,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: ddb8e8f343cc46d28988647aa63b162d
+              expression: last(/Hubitat/hubitat.hub.alerts.hubZwaveCrashed)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.hubZwaveCrashed)=0
+              name: 'Hubitat Alert - ZWave Crashed'
+              event_name: 'Hubitat Alert - ZWave Crashed'
+              priority: WARNING
         -
           uuid: 0f37259461b74091b2cbe2f93ca82464
           name: 'Hubitat Alert - Udpate Available'
@@ -226,6 +271,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: 07d7ab2f5506418fba606e6de2ffb178
+              expression: last(/Hubitat/hubitat.hub.alerts.platformUpdateAvailable)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.platformUpdateAvailable)=0
+              name: 'Hubitat Update Available'
+              event_name: 'Hubitat Update Available'
+              priority: INFO
         -
           uuid: d8aab2b645b2419aa02299329168552d
           name: 'Hubitat Alert - Run Alerts'
@@ -290,6 +344,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: 01efa7fce2d84154af3a6a01c75aa83b
+              expression: last(/Hubitat/hubitat.hub.alerts.zigbeeOffline)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.zigbeeOffline)=0
+              name: 'Hubitat Alert - Zigbee Offline'
+              event_name: 'Hubitat Alert - Zigbee Offline'
+              priority: WARNING
         -
           uuid: 8e19e64c65f24c6eac4c1235318bc199
           name: 'Hubitat Alert - ZWave Offline'
@@ -307,6 +370,15 @@ zabbix_export:
                 - ''
           master_item:
             key: hubitat.hub.data
+          triggers:
+            -
+              uuid: df55a761949843469de6d1247357b680
+              expression: last(/Hubitat/hubitat.hub.alerts.zwaveOffline)=1
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: last(/Hubitat/hubitat.hub.alerts.zwaveOffline)=1
+              name: 'Hubitat Alert - ZWave Offline'
+              event_name: 'Hubitat Alert - ZWave Offline'
+              priority: WARNING
         -
           uuid: 2d29cb1bf34040d6ab02f7e7c3f564af
           name: hubitat.hub.data
@@ -382,9 +454,15 @@ zabbix_export:
             key: hubitat.hub.data
         -
           uuid: 06cbf1aea2424c14a0c4e49015901453
-          name: 'Hubitat Port 80'
+          name: 'Hubitat HTTP'
           type: SIMPLE
           key: 'net.tcp.service.perf[http,,80]'
+          value_type: FLOAT
+        -
+          uuid: 36d79c2dac51431dac0172283257c2ee
+          name: 'Hubitat HTTP'
+          type: SIMPLE
+          key: 'net.tcp.service.perf[http,,443]'
           value_type: FLOAT
       discovery_rules:
         -
@@ -822,3 +900,131 @@ zabbix_export:
           macro: '{$HUBITAT_APP_ID}'
           value: xxxxx
           description: 'Numeric Maker API App ID (From Maker  API URL)  - Example: http://hubitat/apps/api/1332/ The App ID = 1332'
+  graphs:
+    -
+      uuid: f35a91899d2b4dff93672a32fc94c083
+      name: 'Hubitat Alerts'
+      yaxismax: '1'
+      ymin_type_1: FIXED
+      ymax_type_1: FIXED
+      graph_items:
+        -
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubHugeDatabase
+        -
+          sortorder: '1'
+          color: F63100
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubLargeDatabase
+        -
+          sortorder: '2'
+          color: 2774A4
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubLargeishDatabase
+        -
+          sortorder: '3'
+          color: F7941D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubLoadElevated
+        -
+          sortorder: '4'
+          color: FC6EA3
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubHighLoad
+        -
+          sortorder: '5'
+          color: 6C59DC
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubLoadSevere
+        -
+          sortorder: '6'
+          color: C7A72D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubLowMemory
+        -
+          sortorder: '7'
+          color: BA2A5D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.runAlerts
+        -
+          sortorder: '8'
+          color: F230E0
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.spammyDevices
+        -
+          sortorder: '9'
+          color: 5CCD18
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.platformUpdateAvailable
+        -
+          sortorder: '10'
+          color: BB2A02
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.zigbeeOffline
+        -
+          sortorder: '11'
+          color: AC41A5
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.hubZwaveCrashed
+        -
+          sortorder: '12'
+          color: 89ABF8
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.zwaveOffline
+    -
+      uuid: 6ca104f376d245d7a0497991d8093d2d
+      name: 'Hubitat Alerts Counter'
+      graph_items:
+        -
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.runAlertsCounter
+    -
+      uuid: 4f45284e2fa5416396652c0073a3c015
+      name: 'Hubitat Database Size'
+      graph_items:
+        -
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.hub.alerts.databaseSize
+    -
+      uuid: 135baa2ef70243aabdd14e970dca5507
+      name: 'Hubitat Device Count'
+      graph_items:
+        -
+          color: 199C0D
+          calc_fnc: ALL
+          item:
+            host: Hubitat
+            key: hubitat.devices.count
